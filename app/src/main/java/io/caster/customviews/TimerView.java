@@ -10,7 +10,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- *
+ * A simple custom {@link View} subclass that counts up the number of seconds since it was started.
+ * When a TimerView is stopped, the seconds count is reset when the timer next starts.
  */
 public class TimerView extends View {
     private Paint backgroundPaint;
@@ -24,6 +25,10 @@ public class TimerView extends View {
             updateTimer();
         }
     };
+
+    //
+    // Constructors/initialization
+    //
 
     public TimerView(Context context) {
         super(context);
@@ -44,6 +49,10 @@ public class TimerView extends View {
         numberPaint.setTextSize(64f * getResources().getDisplayMetrics().scaledDensity);
     }
 
+    //
+    // Timer interface + helpers
+    //
+
     public void start() {
         startTime = System.currentTimeMillis();
 
@@ -61,6 +70,10 @@ public class TimerView extends View {
 
         postDelayed(updateRunnable, 200L);
     }
+
+    //
+    // View overrides
+    //
 
     @Override
     protected void onDraw(Canvas canvas) {
