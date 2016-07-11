@@ -14,6 +14,7 @@ import android.view.View;
  * When a TimerView is stopped, the seconds count is reset when the timer next starts.
  */
 public class TimerView extends View {
+
     private Paint backgroundPaint;
     private TextPaint numberPaint;
 
@@ -83,13 +84,18 @@ public class TimerView extends View {
         float centerX = Math.round(canvasWidth * 0.5f);
         float centerY = Math.round(canvasHeight * 0.5f);
 
+        // Calculate radius of background.
         float radius = (canvasWidth < canvasHeight ? canvasWidth : canvasHeight) * 0.5f;
 
+        // Calculate elapsed # of seconds.
         String number = String.valueOf((long) ((System.currentTimeMillis() - startTime) * 0.001));
+        // Calculate offsets for positioning text.
         float textOffsetX = numberPaint.measureText(number) * 0.5f;
         float textOffsetY = numberPaint.getFontMetrics().ascent * -0.4f;
 
+        // Draw background.
         canvas.drawCircle(centerX, centerY, radius, backgroundPaint);
+        // Draw # of seconds.
         canvas.drawText(number, centerX - textOffsetX, centerY + textOffsetY, numberPaint);
     }
 }
